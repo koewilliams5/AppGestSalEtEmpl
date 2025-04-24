@@ -13,7 +13,7 @@ class EmployerController extends Controller
     //Tous ceux là retourne une vue
     public function liste_des_employer()
     {
-       $employers = Employer::paginate();
+       $employers = Employer::with('departement')->paginate(10);
         return view('employers.liste_des_employer', compact('employers'));
     }
 
@@ -31,7 +31,7 @@ class EmployerController extends Controller
     }
 
 
-    
+
     //Tous ceux là intéragissent avec la base de donnée, ils permettent l'enregistrement des employés
 
     public function ajouterEnregistrement(EnregistrerEmployerRequest $request)
