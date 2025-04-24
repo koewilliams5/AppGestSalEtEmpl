@@ -24,7 +24,12 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('employers')->group(function () {
         Route::get('/', [EmployerController::class,'liste_des_employer'])->name('employer.liste_des_employer');
+
+        //Ajout d'un employé
         Route::get('/ajouter', [EmployerController::class,'ajouter'])->name('employer.ajouter');
+        Route::post('/ajouter', [EmployerController::class,'ajouterEnregistrement'])->name('employer.ajouterEnregistrement');
+
+
         Route::get('/modifier/{employer}', [EmployerController::class,'modifier'])->name('employer.modifier');
     });
 

@@ -15,14 +15,29 @@
             <div class="app-card app-card-settings shadow-sm p-4">
 
                 <div class="app-card-body">
-                    <form class="settings-form" method="POST">
+{{--                    //Dans ce formulaire j'utilise les old() afin de charger automatiquement les champs qu'on avait--}}
+{{--                    renseigner au paravant--}}
+                    <form class="settings-form" method="POST"  action="{{ route('employer.ajouterEnregistrement') }}" >
                         @csrf
+
+
 
                         <div class="mb-3">
                             <label for="setting-input-3" class="form-label">Département</label>
                             <select name="departement_id" id="departement_id" class="form-control">
                                 <option value=" "></option>
+
+{{--                        //Je vais parcourire tout les départements par foreach afin de les récupérés--}}
+                                @foreach($departements as $departement)
+                                    <option value="{{ $departement->id }}">{{ $departement->name }}</option>
+                                @endforeach
+
                             </select>
+
+                            @error('departement_id')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+
                         </div>
                         <div class="mb-3">
                             <label for="setting-input-1" class="form-label">Nom
@@ -34,19 +49,48 @@
                                         </svg>
                                     </span>
                             </label>
-                            <input type="text" class="form-control" id="setting-input-1" name="nom" placeholder="Entrer le nom " required>
+                            <input type="text" class="form-control" id="setting-input-1" name="nom" value="{{ old('nom') }}" placeholder="Entrer le nom " required>
+
+                            @error('nom')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+
                         </div>
                         <div class="mb-3">
                             <label for="setting-input-2" class="form-label">Prénom</label>
-                            <input type="text" class="form-control" id="setting-input-2" name="prenom" placeholder="Entrer le prenom " required>
+                            <input type="text" class="form-control" id="setting-input-2" name="prenom" value="{{ old('prenom') }}" placeholder="Entrer le prenom " required>
+
+                            @error('prenom')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+
                         </div>
                         <div class="mb-3">
                             <label for="setting-input-3" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="setting-input-3" name="email" placeholder="Entrer un mail valide">
+                            <input type="email" class="form-control" id="setting-input-3" name="email" value="{{ old('email') }}" placeholder="Entrer un mail valide">
+
+                            @error('email')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+
                         </div>
                         <div class="mb-3">
                             <label for="setting-input-3" class="form-label">Contact</label>
-                            <input type="text" class="form-control" id="setting-input-3" name="contact" placeholder="Entrer un contact">
+                            <input type="text" class="form-control" id="setting-input-3" name="contact" value="{{ old('contact') }}" placeholder="Entrer un contact">
+
+                            @error('contact')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="setting-input-3" class="form-label">Montant journalier</label>
+                            <input type="number" class="form-control" id="setting-input-3" name="montant_journalier" value="{{ old('montant_journalier') }}" placeholder="Entrer un montant journalier">
+
+                            @error('montant_journalier')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+
                         </div>
                         <button type="submit" class="btn app-btn-primary" >Enregistrer</button>
                     </form>

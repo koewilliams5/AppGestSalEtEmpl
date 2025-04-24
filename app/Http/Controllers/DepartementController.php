@@ -64,8 +64,6 @@ class DepartementController extends Controller
 
     public function supprimer(Departement $departement)
     {
-
-
         try {
 
             $departement->delete();

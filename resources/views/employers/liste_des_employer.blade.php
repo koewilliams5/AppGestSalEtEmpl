@@ -75,11 +75,11 @@
 
                             @forelse($employers as $employer)
                                 <tr>
-                                    <td class="cell">#15346</td>
-                                    <td class="cell"><span class="truncate">Lorem ipsum dolor sit amet eget volutpat erat</span></td>
-                                    <td class="cell">John Sanders</td>
-                                    <td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td>
-                                    <td class="cell"><span class="badge bg-success">Paid</span></td>
+                                    <td class="cell">{{ $employer->id }}</td>
+                                    <td class="cell"><span class="truncate">{{ $employer->nom }}</span></td>
+                                    <td class="cell">{{ $employer->prenom }}</td>
+                                    <td class="cell"><span>{{ $employer->email }}</span><span class="note">{{$employer->contact}}</span></td>
+                                    <td class="cell"><span class="badge bg-success">{{ $employer->montant_journalier }}</span></td>
                                     <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
                                 </tr>
                             @empty
