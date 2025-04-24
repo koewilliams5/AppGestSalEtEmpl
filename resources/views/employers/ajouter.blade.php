@@ -20,8 +20,6 @@
                     <form class="settings-form" method="POST"  action="{{ route('employer.ajouterEnregistrement') }}" >
                         @csrf
 
-
-
                         <div class="mb-3">
                             <label for="setting-input-3" class="form-label">Département</label>
                             <select name="departement_id" id="departement_id" class="form-control">

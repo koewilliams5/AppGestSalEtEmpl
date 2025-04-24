@@ -18,7 +18,6 @@
                 <form class="settings-form" method="POST" action="{{ route('departement.modifierTraitement', $departement->id) }}">
                     @csrf
 {{--                //je passe de POST à PUT pour la modification du département--}}
-                    @method('PUT')
 
                     <div class="mb-3">
                         <label for="setting-input-1" class="form-label">Nom du département

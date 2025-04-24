@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EnregistrerEmployerRequest;
+use App\Http\Requests\ModifierEnregistrementRequest;
+
 use App\Models\Departement;
 use App\Models\Employer;
 use Illuminate\Http\Request;
@@ -20,6 +22,7 @@ class EmployerController extends Controller
 
     public function ajouter()
     {
+        //ce qui me permettra d'utilisé les éléments du departement dans la vue modifier
         $departements = Departement::all();
        return view('employers.ajouter', compact('departements'));
     }
@@ -27,7 +30,9 @@ class EmployerController extends Controller
 
     public function modifier(Employer $employer)
     {
-        return view('employers.modifier', compact('employer'));
+        $departements = Departement::all(); //ce qui me permettra d'utilisé les éléments du departement dans la vue modifier
+
+        return view('employers.modifier', compact('employer','departements'));
     }
 
 
@@ -44,6 +49,7 @@ class EmployerController extends Controller
             $employer->email = $request->email;
             $employer->contact = $request->contact;
             $employer->montant_journalier = $request->montant_journalier;
+
             $employer->save();
 
             return redirect()->route('employer.liste_des_employer')->with('status','Employé ajouté avec succès');
@@ -53,4 +59,40 @@ class EmployerController extends Controller
         }
     }
 
+
+
+    public function modifierEnregistrement(Employer $employer, ModifierEnregistrementRequest $request)
+    {
+
+        try {
+
+            $employer -> departement_id = $request->departement_id;
+            $employer -> nom = $request->nom;
+            $employer -> prenom = $request->prenom;
+            $employer -> email = $request->email;
+            $employer -> contact = $request->contact;
+            $employer -> montant_journalier = $request->montant_journalier;
+
+            $employer -> update();
+
+            return redirect()->route('employer.liste_des_employer')->with('status','Les informations de l\'employé ont été mise à jour');
+
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+
+
+    public function supprimer(Employer $employer)
+    {
+        try {
+
+            $employer -> delete();
+            return redirect()->route('employer.liste_des_employer')->with('status','L\'employé a été supprimé avec succès');
+
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
 }

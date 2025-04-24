@@ -77,6 +77,7 @@
                             @forelse($employers as $employer)
                                 <tr>
                                     <td class="cell">{{ $employer->id }}</td>
+{{--                                    pour afficher à partir de ma relation aloquent--}}
                                     <td class="cell"> {{ $employer->departement->name }} </td>
                                     <td class="cell">{{ $employer->nom }}</td>
                                     <td class="cell">{{ $employer->prenom }}</td>
@@ -84,7 +85,10 @@
                                     <td class="cell">{{$employer->contact}}</td>
 {{--                                    je multiplie ici le montant journalier pour trouver le salaire par mois--}}
                                     <td class="cell"><span class="badge bg-success" >{{ $employer->montant_journalier * 31 }} FCFA</span></td>
-                                    <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+                                    <td class="cell">
+                                        <a class="btn-sm app-btn-secondary" href="{{ route('employer.modifier', $employer->id) }}">Modifier</a>
+                                        <a class="btn-sm app-btn-secondary" href="{{ route('employer.supprimer', $employer->id) }}">Supprimer</a>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>

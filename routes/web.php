@@ -29,8 +29,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/ajouter', [EmployerController::class,'ajouter'])->name('employer.ajouter');
         Route::post('/ajouter', [EmployerController::class,'ajouterEnregistrement'])->name('employer.ajouterEnregistrement');
 
-
+        //Modifier un employé
         Route::get('/modifier/{employer}', [EmployerController::class,'modifier'])->name('employer.modifier');
+        Route::post('/modifier/{employer}', [EmployerController::class,'modifierEnregistrement'])->name('employer.modifierEnregistrement');
+
+        //Suppression d'un employé
+        Route::get('/{employer}', [EmployerController::class,'supprimer'])->name('employer.supprimer');
+
     });
 
 
@@ -46,7 +51,7 @@ Route::middleware('auth')->group(function () {
 
         //mise à jour d'un département
         Route::get('/modifier/{departement}', [DepartementController::class,'modifier'])->name('departement.modifier');
-        Route::put('/modifier/{departement}', [DepartementController::class,'modifierTraitement'])->name('departement.modifierTraitement');
+        Route::post('/modifier/{departement}', [DepartementController::class,'modifierTraitement'])->name('departement.modifierTraitement');
 
         //Suppression d'un département
         Route::get('/{departement}', [DepartementController::class,'supprimer'])->name('departement.supprimer');

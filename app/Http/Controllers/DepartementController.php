@@ -67,7 +67,7 @@ class DepartementController extends Controller
         try {
 
             $departement->delete();
-            return redirect()->route('departement.liste_des_departements')->with('status','Département supprimé');
+            return redirect()->route('departement.liste_des_departements')->with('status','Département supprimé avec succès');
 
         }catch (Exception $e){
             return $e->getMessage();
