@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\ConfigurationController;
 use \App\Http\Controllers\DepartementController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\AuthController;
@@ -23,6 +25,8 @@ Route::middleware('auth')->group(function () {
     //toutes les routes à l’intérieur commenceront par /employers
 
     Route::prefix('employers')->group(function () {
+
+        //Route qui permettra de faire les affichages
         Route::get('/', [EmployerController::class,'liste_des_employer'])->name('employer.liste_des_employer');
 
         //Ajout d'un employé
@@ -40,9 +44,12 @@ Route::middleware('auth')->group(function () {
 
 
 
+
     //Toutes les routes à l'intérieur commencerons par /departements
 
     Route::prefix('departements')->group(function () {
+
+        //Route qui permettra de faire les affichages
         Route::get('/', [DepartementController::class,'liste_des_departements'])->name('departement.liste_des_departements');
 
         //Ajout d'un département
@@ -55,6 +62,18 @@ Route::middleware('auth')->group(function () {
 
         //Suppression d'un département
         Route::get('/{departement}', [DepartementController::class,'supprimer'])->name('departement.supprimer');
+
+    });
+
+
+
+
+    //Je viens crée une route pour les configurations
+
+    Route::prefix('/configurations')->group(function () {
+
+        //Route qui permettra de faire les affichages
+        Route::get('/',[ConfigurationController::class,'listeConfguration'])->name('configuration.listeConfguration');
 
     });
 });
